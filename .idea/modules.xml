@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DvlpOkHttp.iml" filepath="$PROJECT_DIR$/DvlpOkHttp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dlibrary/myapplication.iml" filepath="$PROJECT_DIR$/dlibrary/myapplication.iml" />
+    </modules>
+  </component>
+</project>
