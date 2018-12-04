@@ -1,5 +1,5 @@
 # DvlpOkHttp
-retrofit2 极简封装，极简介入。
+retrofit2 极简封装，极简接入。
 
 
  [ ![Download](https://api.bintray.com/packages/dvlp-org/MyMoven/dvlpokhttp/images/download.svg) ](https://bintray.com/dvlp-org/MyMoven/dvlpokhttp/_latestVersion)
