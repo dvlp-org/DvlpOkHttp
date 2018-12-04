@@ -38,7 +38,7 @@ public interface ApiService {
 //    Call2<String> getArticle0();
 
     //下载文件
-    @GET("http://shouji.360tpcdn.com/181115/4dc46bd86bef036da927bc59680f514f/com.ss.android.ugc.aweme_330.apk")
+    @GET(Api.CATEGORIES)
     Call2<File> loadDouYinApk();
 }
 

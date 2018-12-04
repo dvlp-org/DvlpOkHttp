@@ -43,7 +43,7 @@ public class OKApplication extends Application {
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         
-      /*  Retrofit retrofit = new Retrofit.Builder()
+       /* Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://wanandroid.com/")
                 .callFactory(new OkHttpClient.Builder()
                         .addNetworkInterceptor(httpLoggingInterceptor)

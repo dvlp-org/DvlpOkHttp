@@ -15,10 +15,10 @@ public class Api {
     public static final String getWXarticle = API_BASE + "wxarticle/chapters/json";
 
     //Get the categories
-    public static final String CATEGORIES = API_BASE + "tree/json";
+    public static final String CATEGORIES = "https://upload.jianshu.io/users/upload_avatars/268450/1acbdceac878.png?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96";
 
     //Get the banner
-    public static final String BANNER = API_BASE + "banner/json";
+    public static final String BANNER =  "http://shouji.360tpcdn.com/181115/4dc46bd86bef036da927bc59680f514f/com.ss.android.ugc.aweme_330.apk";
 
 
     //Login

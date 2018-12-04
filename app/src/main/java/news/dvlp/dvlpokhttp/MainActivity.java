@@ -1,9 +1,16 @@
 package news.dvlp.dvlpokhttp;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,6 +47,12 @@ public class MainActivity extends Activity implements ILoadingView {
         progressView = findViewById(R.id.progress);
         progressView.setTextColor(Color.RED);
 
+        //下载权限
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
+            }
+        }
     }
 
 
@@ -100,13 +113,17 @@ public class MainActivity extends Activity implements ILoadingView {
     static final String TAG_LOAD_APK = "loadApk";
 
     public void download(View view) {
+
+
         final Button button = (Button) view;
         if (button.getText().equals("取消下载")) {
             CallManager.getInstance().cancel(TAG_LOAD_APK);
             return;
         }
 
-        String filePath = new File(getApplicationContext().getExternalCacheDir(), "test_douyin.apk").getPath();
+
+//        String filePath = new File(getApplicationContext().getExternalCacheDir(), "test_douyin.jpg").getPath();
+        String filePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator, "test_douyin.jpg").getPath();
         //构建可以监听进度的client
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .addNetworkInterceptor(getProgressInterceptor()).build();
@@ -166,6 +183,7 @@ public class MainActivity extends Activity implements ILoadingView {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.e("contentLength","contentLength==="+contentLength);
                         progressView.setText("下载进度:"+((int) (progress * 100f / contentLength)));
 
                     }
@@ -173,6 +191,25 @@ public class MainActivity extends Activity implements ILoadingView {
             }
         });
     }
+
+    //读写权限
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    //请求状态码
+    private static int REQUEST_PERMISSION_CODE = 1;
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            for (int i = 0; i < permissions.length; i++) {
+                Log.i("MainActivity", "申请的权限为：" + permissions[i] + ",申请结果：" + grantResults[i]);
+            }
+        }
+    }
+
 
     @Override
     protected void onDestroy() {

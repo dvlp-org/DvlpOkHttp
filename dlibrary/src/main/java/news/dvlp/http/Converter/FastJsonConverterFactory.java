@@ -1,5 +1,10 @@
 package news.dvlp.http.Converter;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.TypeAdapter;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -22,7 +27,10 @@ public class FastJsonConverterFactory extends Converter.Factory {
      */
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-        return new FastJsonResponseBodyConverter<>(type);
+        if (type != File.class) {
+            return new FastJsonResponseBodyConverter<>(type);
+        }
+        return null;
     }
 
     /**
@@ -30,7 +38,11 @@ public class FastJsonConverterFactory extends Converter.Factory {
      */
     @Override
     public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
-        return new FastJsonRequestBodyConverter<>();
+        if (type != File.class) {
+            return new FastJsonRequestBodyConverter<>();
+        }
+        return null;
+
     }
 
 
