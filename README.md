@@ -1,9 +1,15 @@
+
+![image](https://github.com/dvlp-org/DvlpTinker/blob/master/app/src/main/res/raw/banner.jpg?raw=true)
+
 # DvlpOkHttp
+
+
 retrofit2 极简封装，极简接入。
 
+[ ![Download](https://api.bintray.com/packages/dvlp-org/MyMoven/dvlpokhttp/images/download.svg?version=1.0.1) ](https://bintray.com/dvlp-org/MyMoven/dvlpokhttp/1.0.1/link)
+ [![](https://jitpack.io/v/dvlp-org/DvlpOkHttp.svg)](https://jitpack.io/#dvlp-org/DvlpOkHttp)
 
- [ ![Download](https://api.bintray.com/packages/dvlp-org/MyMoven/dvlpokhttp/images/download.svg) ](https://bintray.com/dvlp-org/MyMoven/dvlpokhttp/_latestVersion)
- 
+
  范例请求URL
  http://wanandroid.com/article/list/0/json"
  
@@ -29,7 +35,7 @@ retrofit2 极简封装，极简接入。
 
      加依赖项
  
-     implementation 'com.dvlp:dvlpokhttp:1.0.0'
+     implementation 'com.dvlp:dvlpokhttp:1.0.1'
      
     添加网路权限
  
