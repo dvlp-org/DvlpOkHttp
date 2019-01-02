@@ -9,7 +9,7 @@ public class ConfigHttps {
     public static String codeTag;// json code key
     public static String msgTag; // json msg  key
     public static String dataTag;// json data key
-    public static int successNum; // 默认0 成功
+    public static String successTag; // 默认0 成功
 
 
 
