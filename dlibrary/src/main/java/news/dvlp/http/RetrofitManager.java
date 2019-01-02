@@ -55,11 +55,11 @@ public final class RetrofitManager {
         }
     }
 
-    public static void initJSonTag(String codeStr,String msgStr,String dataStr,int successVal) {
+    public static void initJSonTag(String codeStr,String msgStr,String dataStr,String successVal) {
         ConfigHttps.codeTag=codeStr;
         ConfigHttps.msgTag=msgStr;
         ConfigHttps.dataTag=dataStr;
-        ConfigHttps.successNum=successVal;
+        ConfigHttps.successTag=successVal;
     }
 
     public static void init(String baseUrl) {

@@ -4,7 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DvlpOkHttp.iml" filepath="$PROJECT_DIR$/DvlpOkHttp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dlibrary/myapplication.iml" filepath="$PROJECT_DIR$/dlibrary/myapplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dlibrary/dlibrary.iml" filepath="$PROJECT_DIR$/dlibrary/dlibrary.iml" />
+      <module fileurl="file://E:\dvlp\github\DvlpOkHttp\dlibrary\myapplication.iml" filepath="E:\dvlp\github\DvlpOkHttp\dlibrary\myapplication.iml" />
     </modules>
   </component>
 </project>
