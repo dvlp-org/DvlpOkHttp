@@ -6,7 +6,7 @@
 
 retrofit2 极简封装，极简接入。
 
-[ ![Download](https://api.bintray.com/packages/dvlp-org/MyMoven/dvlpokhttp/images/download.svg?version=1.0.1) ](https://bintray.com/dvlp-org/MyMoven/dvlpokhttp/1.0.1/link)
+[ ![Download](https://api.bintray.com/packages/dvlp-org/MyMoven/dvlpokhttp/images/download.svg?version=1.0.2) ](https://bintray.com/dvlp-org/MyMoven/dvlpokhttp/1.0.2/link)
  [![](https://jitpack.io/v/dvlp-org/DvlpOkHttp.svg)](https://jitpack.io/#dvlp-org/DvlpOkHttp)
 
 
