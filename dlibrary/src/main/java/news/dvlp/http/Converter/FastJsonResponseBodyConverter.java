@@ -43,11 +43,11 @@ public class FastJsonResponseBodyConverter<T> implements Converter<ResponseBody,
             JSONObject jsonObject = new JSONObject(cacheStr);
             final String code = jsonObject.getString(Utils.formatNull(ConfigHttps.codeTag, "errorCode"));
             final String msg = jsonObject.getString(Utils.formatNull(ConfigHttps.msgTag, "errorMsg"));
-            Object data = jsonObject.get(Utils.formatNull(ConfigHttps.dataTag, "data"));
             Tip tip = new Tip(code, msg);
             if (!code .equals(Utils.formatNull(ConfigHttps.successTag + "", "0"))) {
                 throw new HttpError(msg, tip);
             }
+            Object data = jsonObject.get(Utils.formatNull(ConfigHttps.dataTag, "data"));
             Class<?> rawType = $Gson$Types.getRawType(type);
             if (Tip.class == rawType) {
                 return (T) tip;
