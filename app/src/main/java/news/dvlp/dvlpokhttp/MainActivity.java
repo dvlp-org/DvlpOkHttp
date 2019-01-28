@@ -36,8 +36,10 @@ import news.dvlp.http.RequsetManager.CallManager;
 import news.dvlp.http.RetrofitManager;
 import news.dvlp.http.progress.ProgressInterceptor;
 import news.dvlp.http.progress.ProgressListener;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 
 
@@ -106,6 +108,28 @@ public class MainActivity extends Activity implements ILoadingView {
 
                     @Override
                     public void onSuccess(Call2<Article> call2, Article response) {
+//                        Article article= JSON.parseObject(response,Article.class);
+                        Toast.makeText(MainActivity.this, "获取公众号列表成功", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
+    public void articleBc(View view) {
+        String bodyStr="{\"head\":{\"appFlag\":\"BC\",\"channel\":\"Aiqiyi\",\"channelId\":\"1\",\"clientId\":\"10\",\"deviceId\":\"866656036074682\",\"deviceName\":\"xiaomi\",\"orgId\":\"70\",\"systemType\":\"android\",\"token\":\"BC-b892a1730e0e4578aea53a7caa004021\",\"version\":\"3.0.6\"},\"param\":{\"balance\":1.2,\"city\":\"北京\",\"createTime\":\"2018-05-22 09:43:25\",\"phoneNum\":\"13488898841\",\"sex\":\"男\"}}";
+        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), bodyStr);
+
+        RetrofitManager.create(ApiService.class)
+                .getBicai(body)
+                .enqueue(hashCode(), new CallbackAnim<String>(this) {
+                    @Override
+                    public void onError(Call2<String> call2, HttpError error) {
+                        Toast.makeText(MainActivity.this, error.msg, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onSuccess(Call2<String> call2, String response) {
 //                        Article article= JSON.parseObject(response,Article.class);
                         Toast.makeText(MainActivity.this, "获取公众号列表成功", Toast.LENGTH_SHORT).show();
 

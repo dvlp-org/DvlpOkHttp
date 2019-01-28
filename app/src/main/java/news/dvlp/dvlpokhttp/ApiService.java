@@ -9,6 +9,8 @@ import news.dvlp.dvlpokhttp.entity.Article;
 import news.dvlp.dvlpokhttp.entity.LoginInfo;
 import news.dvlp.dvlpokhttp.entity.WXArticle;
 import news.dvlp.http.Callback.Call2;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -41,6 +43,11 @@ public interface ApiService {
     //下载文件
     @GET(Api.BANNER)
     Call2<File> loadDouYinApk(@Header("Range") String range);
+
+
+    //比财测试
+    @POST(Api.GET_BICAI)
+    Call2<String> getBicai(@Body RequestBody  body);
 }
 
 

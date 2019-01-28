@@ -31,6 +31,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="articleBc"
+        android:text="获取比财测试接口"
+        android:textAllCaps="false" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="download"
         android:text="下载抖音apk文件"
         android:textAllCaps="false" />

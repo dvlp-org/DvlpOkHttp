@@ -44,4 +44,6 @@ public class Api {
     public static final String GET_FAVORITE_ARTICLES = API_BASE + "lg/collect/list/";
 
 
+    public static final String GET_BICAI ="http://47.94.110.156:9000/member/add ";
+
 }

@@ -52,7 +52,7 @@ public class OKApplication extends Application {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         RetrofitManager.init(retrofit);*/
-//        RetrofitManager.initJSonTag("sss","sss","sss",0);
+        RetrofitManager.initJSonTag("code","msg","data",0+"");
         RetrofitManager.init(Api.API_BASE);
 
     }
