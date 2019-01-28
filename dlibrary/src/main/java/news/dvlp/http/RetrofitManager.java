@@ -1,13 +1,9 @@
 package news.dvlp.http;
 
-import android.util.Log;
 
-import com.orhanobut.logger.Logger;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-
 import news.dvlp.http.Callback.ExecutorCallAdapterFactory;
 import news.dvlp.http.ConfigHttp.ConfigHttps;
 import news.dvlp.http.Converter.FastJsonConverterFactory;
@@ -48,10 +44,10 @@ public final class RetrofitManager {
     public static void init(Retrofit retrofit) {
         Utils.checkNotNull(retrofit, "retrofit==null");
         if (sRetrofit == null) {
-            Log.d(TAG, LOG_INIT_RETROFIT);
+//            Logger.d(TAG, LOG_INIT_RETROFIT);
             sRetrofit = retrofit;
         } else {
-            Log.e(TAG, WARNING_RE_INIT_RETROFIT);
+//            Logger.e(TAG, WARNING_RE_INIT_RETROFIT);
         }
     }
 
@@ -67,7 +63,7 @@ public final class RetrofitManager {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Logger.d(message);
+//                Logger.d(message);
             }
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

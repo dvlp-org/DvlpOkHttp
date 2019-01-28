@@ -12,6 +12,7 @@ import news.dvlp.http.Callback.Call2;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 /**
@@ -38,8 +39,8 @@ public interface ApiService {
 //    Call2<String> getArticle0();
 
     //下载文件
-    @GET(Api.CATEGORIES)
-    Call2<File> loadDouYinApk();
+    @GET(Api.BANNER)
+    Call2<File> loadDouYinApk(@Header("Range") String range);
 }
 
 

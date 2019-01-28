@@ -2,14 +2,18 @@ package news.dvlp.dvlpokhttp;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -112,6 +116,7 @@ public class MainActivity extends Activity implements ILoadingView {
 
     static final String TAG_LOAD_APK = "loadApk";
 
+    private String range="0";
     public void download(View view) {
 
 
@@ -123,7 +128,8 @@ public class MainActivity extends Activity implements ILoadingView {
 
 
 //        String filePath = new File(getApplicationContext().getExternalCacheDir(), "test_douyin.jpg").getPath();
-        String filePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator, "test_douyin.jpg").getPath();
+        String filePath = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator, "test_douyin.apk").getPath();
+//        String filePath = Environment.getExternalStorageDirectory() + "/myapp/";
         //构建可以监听进度的client
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .addNetworkInterceptor(getProgressInterceptor()).build();
@@ -136,11 +142,13 @@ public class MainActivity extends Activity implements ILoadingView {
                 .build();
 
         retrofit.create(ApiService.class)
-                .loadDouYinApk()
+                .loadDouYinApk(range)
                 .enqueue(TAG_LOAD_APK, new Callback2<File>() {
                     @Override
                     public void onStart(Call2<File> call2) {
                         super.onStart(call2);
+                        Log.e("contentLength-star","range==="+range+"---------------------------------");
+
                         button.setText("取消下载");
                     }
 
@@ -152,7 +160,7 @@ public class MainActivity extends Activity implements ILoadingView {
 
                     @Override
                     public void onSuccess(Call2<File> call2, File response) {
-
+                        installApk(response,getApplicationContext());
                     }
 
                     @Override
@@ -171,6 +179,25 @@ public class MainActivity extends Activity implements ILoadingView {
                 });
     }
 
+    /**
+     * 安装apk ,兼容6.0问题
+     */
+    public static void installApk(File result, Context mContext) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri contentUri = FileProvider.getUriForFile(mContext, mContext.getPackageName()+".fileprovider" + "", result);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+            mContext.startActivity(intent);
+        } else {
+            // apk下载完成后，调用系统的安装方法
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setDataAndType(Uri.fromFile(result), "application/vnd.android.package-archive");
+            mContext.startActivity(intent);
+        }
+
+    }
     private ProgressInterceptor getProgressInterceptor() {
         return new ProgressInterceptor(new ProgressListener() {
             @Override
@@ -183,7 +210,8 @@ public class MainActivity extends Activity implements ILoadingView {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("contentLength","contentLength==="+contentLength);
+//                        Log.e("contentLength","range==="+range+"-----progress"+progress);
+                        range=progress+"";
                         progressView.setText("下载进度:"+((int) (progress * 100f / contentLength)));
 
                     }
