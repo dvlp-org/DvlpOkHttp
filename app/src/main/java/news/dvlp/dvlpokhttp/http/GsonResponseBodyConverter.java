@@ -38,10 +38,10 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
         String cacheStr = value.string();
         try {
             JSONObject jsonObject = new JSONObject(cacheStr);
-            final int code = jsonObject.getInt("errorCode");
+            final String code = jsonObject.getString("errorCode");
             final String msg = jsonObject.getString("errorMsg");
             Tip tip = new Tip(code, msg);
-            if (code != 0) {
+            if (code != "0") {
                 throw new HttpError(msg, tip);
             }
             Class<?> rawType = $Gson$Types.getRawType(type);

@@ -5,15 +5,15 @@ package news.dvlp.http.Converter;
  * Created by karler on 2017/9/26.
  */
 public class Tip {
-    private int code = -1;
+    private String code = "-1";
     private String msg;
 
-    public Tip(int code, String msg) {
+    public Tip(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
@@ -23,6 +23,6 @@ public class Tip {
     }
 
     public boolean isSuccess() {
-        return code == 0;
+        return code == 0+"";
     }
 }
