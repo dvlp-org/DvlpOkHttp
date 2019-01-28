@@ -2,6 +2,8 @@ package news.dvlp.http;
 
 
 
+import com.orhanobut.logger.Logger;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import news.dvlp.http.Callback.ExecutorCallAdapterFactory;
@@ -63,7 +65,7 @@ public final class RetrofitManager {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-//                Logger.d(message);
+                Logger.d(message);
             }
         });
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
