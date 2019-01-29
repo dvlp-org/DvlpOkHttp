@@ -46,10 +46,10 @@ public final class RetrofitManager {
     public static void init(Retrofit retrofit) {
         Utils.checkNotNull(retrofit, "retrofit==null");
         if (sRetrofit == null) {
-//            Logger.d(TAG, LOG_INIT_RETROFIT);
+            Logger.d(TAG, LOG_INIT_RETROFIT);
             sRetrofit = retrofit;
         } else {
-//            Logger.e(TAG, WARNING_RE_INIT_RETROFIT);
+            Logger.e(TAG, WARNING_RE_INIT_RETROFIT);
         }
     }
 
