@@ -4,6 +4,7 @@ package news.dvlp.dvlpokhttp;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import news.dvlp.dvlpokhttp.entity.Article;
 import news.dvlp.dvlpokhttp.entity.LoginInfo;
@@ -12,10 +13,12 @@ import news.dvlp.http.Callback.Call2;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 /**
  * 创建时间：2018/4/8
@@ -46,8 +49,9 @@ public interface ApiService {
 
 
     //比财测试
+//    @FormUrlEncoded
     @POST(Api.GET_BICAI)
-    Call2<String> getBicai(@Body RequestBody  body);
+    Call2<String> getBicai(@Body Map<String, Map<String, Object>> map);
 }
 
 

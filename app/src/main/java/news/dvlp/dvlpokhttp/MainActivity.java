@@ -20,8 +20,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import news.dvlp.dvlpokhttp.entity.Article;
 import news.dvlp.dvlpokhttp.entity.LoginInfo;
@@ -115,12 +119,72 @@ public class MainActivity extends Activity implements ILoadingView {
                 });
     }
 
+
+    /***
+     * 组装签名和通道信息--open api
+     * @param listMap 为比财数据map
+     * @return 为包装后结果数据  Map<String, Object>
+     */
+    public static Map<String, Object> httpRequest(Map<String, Map<String, Object>> listMap) {
+        Map<String, Object> mapParams = new HashMap<>();
+        try { // 组装数据
+            mapParams.put("biz_data", listMap);
+            mapParams.put("channel_id", "");
+            //加签
+            mapParams.put("sign_data", "");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+        return mapParams;
+    }
+    /***
+     * 组装签名和通道信息--open api
+     * @param listMap 为比财数据map
+     * @return 为包装后结果数据 JSON String
+     */
+    public static String httpRequestJson(Map<String, Map<String, Object>> listMap) {
+        return JSON.toJSONString(httpRequest(listMap));
+    }
+
+
+    private static Map<String, Object> getBaseParams() {
+
+        // 拼接参数
+        Map<String, Object> headMap = new HashMap();
+        headMap.put("appFlag", "APP_FLAG");
+        headMap.put("channel", "APP_FLAG");
+        headMap.put("channelId", "10");
+        headMap.put("clientId", "");
+        headMap.put("deviceId", "");
+        headMap.put("deviceName", "");
+        headMap.put("orgId", "orgId");
+        String version = "";
+        version = version.replace("v", "");//和ios保持统一，去掉V
+        headMap.put("version", version);
+        headMap.put("systemType", "systemType");
+        headMap.put("token", "token");
+
+        return headMap;
+    }
+
+
     public void articleBc(View view) {
         String bodyStr="{\"head\":{\"appFlag\":\"BC\",\"channel\":\"Aiqiyi\",\"channelId\":\"1\",\"clientId\":\"10\",\"deviceId\":\"866656036074682\",\"deviceName\":\"xiaomi\",\"orgId\":\"70\",\"systemType\":\"android\",\"token\":\"BC-b892a1730e0e4578aea53a7caa004021\",\"version\":\"3.0.6\"},\"param\":{\"balance\":1.2,\"city\":\"北京\",\"createTime\":\"2018-05-22 09:43:25\",\"phoneNum\":\"13488898841\",\"sex\":\"男\"}}";
-        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), bodyStr);
+//        RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), bodyStr);
+
+
+        //parm
+        Map<String, Object> paramMap = new HashMap();
+        paramMap.put("ORG_ID", "11111");
+
+
+        Map<String, Map<String, Object>> listMap = new HashMap();
+        listMap.put("head", getBaseParams());
+        listMap.put("param", paramMap);
 
         RetrofitManager.create(ApiService.class)
-                .getBicai(body)
+                .getBicai(listMap)
                 .enqueue(hashCode(), new CallbackAnim<String>(this) {
                     @Override
                     public void onError(Call2<String> call2, HttpError error) {
