@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import news.dvlp.http.Callback.ExecutorCallAdapterFactory;
 import news.dvlp.http.ConfigHttp.ConfigHttps;
 import news.dvlp.http.Converter.FastJsonConverterFactory;
-import news.dvlp.http.Interceptor.HeaderInterceptor;
+import news.dvlp.http.Interceptor.DvlpInterceptor;
 import news.dvlp.http.Interceptor.HttpLoggingInterceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -61,6 +61,11 @@ public final class RetrofitManager {
         ConfigHttps.successTag=successVal;
     }
 
+    public static void initHeadParam(Map<String, Object> head) {
+        ConfigHttps.headParam=head;
+    }
+
+
     public static void init(String baseUrl) {
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
@@ -73,7 +78,7 @@ public final class RetrofitManager {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .callFactory(new OkHttpClient.Builder()
-//                        .addInterceptor(new HeaderInterceptor())
+                        .addInterceptor(new DvlpInterceptor())
                         .addNetworkInterceptor(httpLoggingInterceptor)
                         .build())
                 .addCallAdapterFactory(ExecutorCallAdapterFactory.INSTANCE)

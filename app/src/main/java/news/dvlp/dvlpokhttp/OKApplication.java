@@ -10,6 +10,9 @@ import com.orhanobut.logger.LogStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import news.dvlp.http.Interceptor.HttpLoggingInterceptor;
 import news.dvlp.http.RetrofitManager;
 
@@ -53,8 +56,28 @@ public class OKApplication extends Application {
                 .build();
         RetrofitManager.init(retrofit);*/
         RetrofitManager.initJSonTag("code","msg","data",0+"");
+        RetrofitManager.initHeadParam(getBaseParams());
         RetrofitManager.init(Api.API_BASE);
 
+    }
+    private static Map<String, Object> getBaseParams() {
+
+        // 拼接参数
+        Map<String, Object> headMap = new HashMap();
+        headMap.put("appFlag", "APP_FLAG");
+        headMap.put("channel", "APP_FLAG");
+        headMap.put("channelId", "10");
+        headMap.put("clientId", "clientId");
+        headMap.put("deviceId", "clientId");
+        headMap.put("deviceName", "clientId");
+        headMap.put("orgId", "orgId");
+        String version = "clientId";
+        version = version.replace("v", "");//和ios保持统一，去掉V
+        headMap.put("version", version);
+        headMap.put("systemType", "systemType");
+        headMap.put("token", "token");
+
+        return headMap;
     }
 
     public static class LogCatStrategy implements LogStrategy {

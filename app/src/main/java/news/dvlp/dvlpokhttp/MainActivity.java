@@ -175,16 +175,16 @@ public class MainActivity extends Activity implements ILoadingView {
 
 
         //parm
-        Map<String, Object> paramMap = new HashMap();
+        Map<String, String> paramMap = new HashMap();
         paramMap.put("ORG_ID", "11111");
 
 
         Map<String, Map<String, Object>> listMap = new HashMap();
         listMap.put("head", getBaseParams());
-        listMap.put("param", paramMap);
+//        listMap.put("param", paramMap);
 
         RetrofitManager.create(ApiService.class)
-                .getBicai(listMap)
+                .getBicai(paramMap)
                 .enqueue(hashCode(), new CallbackAnim<String>(this) {
                     @Override
                     public void onError(Call2<String> call2, HttpError error) {

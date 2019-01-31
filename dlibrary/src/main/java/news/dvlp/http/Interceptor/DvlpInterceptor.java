@@ -1,13 +1,12 @@
 package news.dvlp.http.Interceptor;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
-import okhttp3.FormBody;
-import okhttp3.HttpUrl;
+import news.dvlp.http.ConfigHttp.ConfigHttps;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -22,19 +21,32 @@ import okio.Buffer;
 /**
  * Retrofit 基本参数拦截器
  */
-public class HeaderInterceptor2 implements Interceptor {
+public class DvlpInterceptor implements Interceptor {
+
+
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
 
+        if(ConfigHttps.headParam.isEmpty()){
+            return chain.proceed(originalRequest);
+        }
+        String bodyStr="{" +
+                "\"head\":" + JSON.toJSONString(ConfigHttps.headParam)+
+                ",\"param\":" +bodyToString(originalRequest.body())+
+                "}";
+
+        ConfigHttps.bodyParam=bodyStr;
         Request.Builder requestBuilder  = originalRequest.newBuilder();
         originalRequest = requestBuilder.addHeader("Content-Type", "application/json;charset=UTF-8")
                 .post(RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),
-                        bodyToString(originalRequest.body())))//关键部分，设置requestBody的编码格式为json
+                        bodyStr
+                ))
                 .build();
         return chain.proceed(originalRequest);
     }
 
+    //设置requestBody的编码格式为json
     private static String bodyToString(final RequestBody request) {
         try {
             final RequestBody copy = request;
@@ -48,5 +60,7 @@ public class HeaderInterceptor2 implements Interceptor {
             return "did not work";
         }
     }
+
+
 
 }

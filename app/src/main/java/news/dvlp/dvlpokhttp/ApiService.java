@@ -51,7 +51,10 @@ public interface ApiService {
     //比财测试
 //    @FormUrlEncoded
     @POST(Api.GET_BICAI)
-    Call2<String> getBicai(@Body Map<String, Map<String, Object>> map);
+    Call2<String> getBicai(@Body Map<String, String> map);
+
+    @POST(Api.GET_BICAI)
+    Call2<String> getBicai2(@Body Map<String, Map<String, Object>> map);
 }
 
 
