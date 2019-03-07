@@ -6,9 +6,9 @@
 
 retrofit2 极简封装，极简接入。
 
-[ ![bintray](https://api.bintray.com/packages/dvlp-org/MyMoven/dvlpokhttp/images/download.svg?version=1.0.3) ](https://bintray.com/dvlp-org/MyMoven/dvlpokhttp/1.0.3/link)
+ 
  [![](https://jitpack.io/v/dvlp-org/DvlpOkHttp.svg)](https://jitpack.io/#dvlp-org/DvlpOkHttp)
-
+ [![](https://img.shields.io/badge/bintray-1.0.3-brightgreen.svg)](https://jitpack.io/#dvlp-org/DvlpOkHttp)
 
  范例请求URL
  http://wanandroid.com/article/list/0/json"
