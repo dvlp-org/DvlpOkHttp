@@ -12,6 +12,7 @@ import java.lang.reflect.Type;
 
 
 import news.dvlp.http.Callback.HttpError;
+import news.dvlp.http.ConfigHttp.BodyString;
 import news.dvlp.http.ConfigHttp.ConfigHttps;
 import news.dvlp.http.Utils;
 import okhttp3.ResponseBody;
@@ -40,6 +41,12 @@ public class FastJsonResponseBodyConverter<T> implements Converter<ResponseBody,
         String cacheStr = bufferedSource.readUtf8();
         bufferedSource.close();
         try {
+            Class<?> rawType = $Gson$Types.getRawType(type);
+            if (BodyString.class == rawType) {
+                BodyString bodyString=new BodyString();
+                bodyString.bodyString=cacheStr;
+                return (T)bodyString;
+            }
             JSONObject jsonObject = new JSONObject(cacheStr);
             final String code = jsonObject.getString(Utils.formatNull(ConfigHttps.codeTag, "errorCode"));
             final String msg = jsonObject.getString(Utils.formatNull(ConfigHttps.msgTag, "errorMsg"));
@@ -48,7 +55,6 @@ public class FastJsonResponseBodyConverter<T> implements Converter<ResponseBody,
                 throw new HttpError(msg, tip);
             }
             Object data = jsonObject.get(Utils.formatNull(ConfigHttps.dataTag, "data"));
-            Class<?> rawType = $Gson$Types.getRawType(type);
             if (Tip.class == rawType) {
                 return (T) tip;
             }

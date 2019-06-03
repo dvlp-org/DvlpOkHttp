@@ -26,25 +26,25 @@ public class OKApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.addLogAdapter(new AndroidLogAdapter(PrettyFormatStrategy
-                .newBuilder()
-                .logStrategy(new LogCatStrategy())
-                .tag("OKHTTP_LOG")
-                .methodCount(1).showThreadInfo(false).build()) {
-            @Override
-            public boolean isLoggable(int priority, String tag) {
-                return BuildConfig.DEBUG;
-            }
-        });
-
-
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Logger.d(message);
-            }
-        });
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        Logger.addLogAdapter(new AndroidLogAdapter(PrettyFormatStrategy
+//                .newBuilder()
+//                .logStrategy(new LogCatStrategy())
+//                .tag("OKHTTP_LOG")
+//                .methodCount(1).showThreadInfo(false).build()) {
+//            @Override
+//            public boolean isLoggable(int priority, String tag) {
+//                return BuildConfig.DEBUG;
+//            }
+//        });
+//
+//
+//        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+//            @Override
+//            public void log(String message) {
+//                Logger.d(message);
+//            }
+//        });
+//        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         
        /* Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://wanandroid.com/")
@@ -55,8 +55,8 @@ public class OKApplication extends Application {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         RetrofitManager.init(retrofit);*/
-        RetrofitManager.initJSonTag("code","msg","data",0+"");
-        RetrofitManager.initHeadParam(getBaseParams());
+//        RetrofitManager.initJSonTag("code","msg","data",0+"");
+//        RetrofitManager.initHeadParam(getBaseParams());
         RetrofitManager.init(Api.API_BASE);
 
     }

@@ -10,6 +10,7 @@ import news.dvlp.dvlpokhttp.entity.Article;
 import news.dvlp.dvlpokhttp.entity.LoginInfo;
 import news.dvlp.dvlpokhttp.entity.WXArticle;
 import news.dvlp.http.Callback.Call2;
+import news.dvlp.http.ConfigHttp.BodyString;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -37,7 +38,7 @@ public interface ApiService {
 
     //获取首页文章列表
     @GET("article/list/0/json")
-    Call2<Article> getArticle0();
+    Call2<BodyString> getArticle0();
 
     //获取首页文章列表
 //    @GET("article/list/0/json")

@@ -34,6 +34,7 @@ import news.dvlp.http.Callback.Call2;
 import news.dvlp.http.Callback.Callback2;
 import news.dvlp.http.Callback.CallbackAnim;
 import news.dvlp.http.Callback.HttpError;
+import news.dvlp.http.ConfigHttp.BodyString;
 import news.dvlp.http.ControllerView.ILoadingView;
 import news.dvlp.http.Converter.FileConverterFactory;
 import news.dvlp.http.RequsetManager.CallManager;
@@ -100,18 +101,38 @@ public class MainActivity extends Activity implements ILoadingView {
                 });
     }
 
+//    public void article0222(View view) {
+//        RetrofitManager.create(ApiService.class)
+//                .getArticle0()
+//                .enqueue(hashCode(), new CallbackAnim<String>(this) {
+//                    @Override
+//                    public void onError(Call2<String> call2, HttpError error) {
+//                        Toast.makeText(MainActivity.this, error.msg, Toast.LENGTH_SHORT).show();
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(Call2<String> call2, String response) {
+////                        Article article= JSON.parseObject(response,Article.class);
+//                        Toast.makeText(MainActivity.this, "获取公众号列表成功", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+////    }
+//
+//
     public void article0(View view) {
         RetrofitManager.create(ApiService.class)
                 .getArticle0()
-                .enqueue(hashCode(), new CallbackAnim<Article>(this) {
+                .enqueue(hashCode(), new CallbackAnim<BodyString>(this) {
                     @Override
-                    public void onError(Call2<Article> call2, HttpError error) {
+                    public void onError(Call2<BodyString> call2, HttpError error) {
                         Toast.makeText(MainActivity.this, error.msg, Toast.LENGTH_SHORT).show();
 
                     }
 
                     @Override
-                    public void onSuccess(Call2<Article> call2, Article response) {
+                    public void onSuccess(Call2<BodyString> call2, BodyString response) {
 //                        Article article= JSON.parseObject(response,Article.class);
                         Toast.makeText(MainActivity.this, "获取公众号列表成功", Toast.LENGTH_SHORT).show();
 
